@@ -18,7 +18,7 @@ Tested on CentOS 6.5, Cloudeta Manager 5.6.0 (newer versions like 5.7 etc not te
 
 ### Parcel
 1. Create the DATASTAX\_CASSANDRA parcel: `./build_parcel.sh <Version> <Distro>`. Example: `./build_parcel.sh 2.2.6 el6`
-2. Serve the parcel: `./serve-parcel.sh`
+2. Serve the parcel: `./serve_parcel.sh`
 3. In CM, add your machine to the list of `Remote Parcel Repository URLs` and click `Check for New Parcels`.
 4. Download, Distribute, Activate. No need to restart the cluster as this parcel is not a dependency for any service.
 
