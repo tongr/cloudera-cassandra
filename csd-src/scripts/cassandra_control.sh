@@ -1,8 +1,8 @@
 #!/bin/bash
 CMD=$1
 
-_term() { 
-  echo "Caught SIGTERM signal!" 
+_term() {
+  echo "Caught SIGTERM signal!"
   kill -TERM "$child" 2>/dev/null
 }
 
@@ -12,7 +12,7 @@ RETVAL=0
 PROG="Cassandra"
 NAME="cassandra"
 
-if [ -z $CASSANDRA_HOME ] 
+if [ -z $CASSANDRA_HOME ]
 	then
 	CASSANDRA_HOME=/opt/cloudera/parcels/DATASTAX_CASSANDRA
 fi
@@ -57,14 +57,14 @@ EOL
 
 case $CMD in
   (deploy)
-  
+
    adjust_config
 
    cp $CASSANDRA_CONF/cassandra.yaml $CASSANDRA_CONF/$CLIENT_CONFIG_DIR/
 
   ;;
   (start)
-   
+
    adjust_config
 
    echo "$PROG user is:" $CASSANDRA_USER
@@ -83,22 +83,22 @@ case $CMD in
    chown -R $CASSANDRA_USER:$CASSANDRA_USER $CASSANDRA_SAVED_CACHES_DIR
 
    cd $CASSANDRA_HOME
-   rm -rf logs   
-   ln -s $CASSANDRA_LOG_DIR logs 
+   rm -rf logs
+   ln -s $CASSANDRA_LOG_DIR logs
 
    echo "Starting $PROG on" `hostname`
    $CASSANDRA_HOME/bin/cassandra -f &
-   child=$! 
+   child=$!
    wait "$child"
    ;;
   (stop)
 
     echo "$PROG run directory is:" $CASSANDRA_RUN_DIR
     echo "Shutting down $PROG on" `hostname`
-    
+
     export CLASSPATH="$CASSANDRA_CONF:$CASSANDRA_HOME/bin/cassandra"
     for jar in "$CASSANDRA_HOME"/lib/*.jar; do export CLASSPATH="$CLASSPATH:$jar"; done
-    
+
     nodetool disablegossip
     nodetool disablethrift
     nodetool drain
