@@ -87,7 +87,7 @@ case $CMD in
    ln -s $CASSANDRA_LOG_DIR logs
 
    echo "Starting $PROG on" `hostname`
-   $CASSANDRA_HOME/bin/cassandra -f &
+   sudo -u $CASSANDRA_USER $CASSANDRA_HOME/bin/cassandra -f &
    child=$!
    wait "$child"
    ;;
