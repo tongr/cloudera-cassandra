@@ -35,5 +35,6 @@ java -jar cm_ext/validator/target/validator.jar -f ./$PARCEL
 # Create parcel manifest
 python cm_ext/make_manifest/make_manifest.py .
 
+mkdir -p parcel-and-csd/
 mv manifest.json parcel-and-csd/
 mv $PARCEL parcel-and-csd/
