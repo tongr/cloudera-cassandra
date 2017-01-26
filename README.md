@@ -6,29 +6,31 @@ This is a POC version of managing Cassandra cluster via Cloudera Manager.
 
 * Python 2.7+ (to create parcel's manifest)
 * Maven
-* Cloudera's **cm_ext** (a tool for making CM parcels and CSDs). Install it on your workstation like so:
-
-1. `mkdir -p ~/github; cd ~/github`
-2. `git clone https://github.com/cloudera/cm_ext; cd cm_ext`
-3. `mvn package`
 
 ## Instructions
+Tested on Ubuntu 14.04/16.04, Cloudeta Manager 5.6.0 (newer versions like 5.7 etc not tested), Datastax Cassandra 2.2.6.
 
-Tested on CentOS 6.5, Cloudeta Manager 5.6.0 (newer versions like 5.7 etc not tested), Datastax Cassandra 2.2.6.
+### Build all
+Current versions of Apache cassandra can be found here: http://cassandra.apache.org/download/
+Choose a binary and create a parcel server using:
+```
+bash deploy_and_serve.sh <binary_url> <distro> [webserver_port]
+```
 
-### Parcel
-1. Create the DATASTAX\_CASSANDRA parcel: `./build_parcel.sh <Version> <Distro>`. Example: `./build_parcel.sh 2.2.6 el6`
-2. Serve the parcel: `./serve_parcel.sh`
-3. In CM, add your machine to the list of `Remote Parcel Repository URLs` and click `Check for New Parcels`.
-4. Download, Distribute, Activate. No need to restart the cluster as this parcel is not a dependency for any service.
+For instance building a parcel with Apache Cassandra 3.9 for Ubuntu Trusty Tahr hosts
+```
+bash deploy_and_serve.sh http://www-eu.apache.org/dist/cassandra/3.9/apache-cassandra-3.9-bin.tar.gz trusty
+```
+
+### Add Parcel
+1. In CM, add your machine to the list of `Remote Parcel Repository URLs` and click `Check for New Parcels`.
+1. Download, Distribute, Activate. No need to restart the cluster as this parcel is not a dependency for any service.
 
 ### CSD
-1. Create the CSD: `./build_csd.sh <Version>`. Example: ` ./build_csd.sh 1.0`. The CSD version is independent of the 
-parcel version.
-2. Copy the CSD jar (`DATASTAX-CASSANDRA-1.0.jar`) to CM host at `/opt/cloudera/csd/` and change the ownership of the jar to `﻿cloudera-scm:cloudera-scm`
-3. Restart CM `service cloudera-scm-server restart`
-4. Restart _Cloudera Management Service_ from the CM UI.
-5. Install the Cassandra service with _Add a service_ option in CM (note that some workaround in the cluster installation is needed as for now - **you may add only 1 seed during initial service startup**)
+1. Copy the CSD jar (`DATASTAX-CASSANDRA-1.0.jar`) to CM host at `/opt/cloudera/csd/` and change the ownership of the jar to `﻿cloudera-scm:cloudera-scm`
+1. Restart CM `service cloudera-scm-server restart`
+1. Restart _Cloudera Management Service_ from the CM UI.
+1. Install the Cassandra service with _Add a service_ option in CM (note that some workaround in the cluster installation is needed as for now - **you may add only 1 seed during initial service startup**)
 
 **Note**: Step 3 and 4 can be avoided by using the 
 [experimental](https://github.com/cloudera/cm_ext/wiki/CSD-Developer-Tricks-and-Tools#partial-installation-development-mode-only) api for installing CSDs without restarting CM.
