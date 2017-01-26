@@ -9,10 +9,11 @@ fi
 
 set -ex
 
-JARNAME=DATASTAX_CASSANDRA-$1.jar
+JARNAME=CASSANDRA-$1.jar
 
 # validate service description
 java -jar cm_ext/validator/target/validator.jar -s ./csd-src/descriptor/service.sdl
 
+mkdir -p ./parcel-and-csd
 jar -cvf ./parcel-and-csd/$JARNAME -C ./csd-src .
 echo "Created $JARNAME"
