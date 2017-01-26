@@ -14,12 +14,17 @@ Tested on Ubuntu 14.04/16.04, Cloudeta Manager 5.6.0 (newer versions like 5.7 et
 Current versions of Apache cassandra can be found here: http://cassandra.apache.org/download/
 Choose a binary and create a parcel server using:
 ```
-bash deploy_and_serve.sh <binary_url> <distro> [webserver_port]
+bash deploy.sh <binary_url> <distro>
 ```
 
 For instance building a parcel with Apache Cassandra 3.9 for Ubuntu Trusty Tahr hosts
 ```
-bash deploy_and_serve.sh http://www-eu.apache.org/dist/cassandra/3.9/apache-cassandra-3.9-bin.tar.gz trusty
+bash deploy.sh http://www-eu.apache.org/dist/cassandra/3.9/apache-cassandra-3.9-bin.tar.gz trusty
+```
+
+Serve the parcel on port 8080
+```
+bash serve_parcel.sh 8080
 ```
 
 ### Add Parcel
