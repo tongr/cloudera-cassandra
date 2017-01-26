@@ -12,7 +12,7 @@ set -ex
 JARNAME=DATASTAX_CASSANDRA-$1.jar
 
 # validate service description
-java -jar /home/cloud-user/github/cm_ext/validator/target/validator.jar -s ./csd-src/descriptor/service.sdl
+java -jar cm_ext/validator/target/validator.jar -s ./csd-src/descriptor/service.sdl
 
 jar -cvf ./parcel-and-csd/$JARNAME -C ./csd-src .
 echo "Created $JARNAME"
