@@ -10,6 +10,7 @@ else
   tar xfzv tmp | cut -d/ -f1 | grep -v '^$' | sort -u > .downloaded
   rm -f tmp
   VERSION="$(cat .downloaded | sed -e 's/apache-cassandra-//g')"
+  rm -rf "CASSANDRA-$VERSION"
   mv "$(cat .downloaded)" "CASSANDRA-$VERSION"
   echo "CASSANDRA-$VERSION" > .downloaded
 fi
