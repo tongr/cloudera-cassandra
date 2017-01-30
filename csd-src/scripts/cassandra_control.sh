@@ -87,7 +87,7 @@ case $CMD in
    ln -s $CASSANDRA_LOG_DIR logs
 
    echo "Starting $PROG on" `hostname`
-   if [ "root" -eq "$CASSANDRA_USER" ]; then
+   if [ "root" = "$CASSANDRA_USER" ]; then
      $CASSANDRA_HOME/bin/cassandra -f -R &
    else
      sudo -u $CASSANDRA_USER $CASSANDRA_HOME/bin/cassandra -f &
