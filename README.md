@@ -1,3 +1,6 @@
+# Branch discontinued due to huge git history containing Cassandra binaries
+use `git clone -b slim --single-branch https://github.com/tongr/cloudera-cassandra.git` instead
+
 # cloudera-cassandra
 
 This is a POC version of managing Cassandra cluster via Cloudera Manager. 
