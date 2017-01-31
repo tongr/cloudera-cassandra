@@ -1,5 +1,5 @@
 {
-   "name" : "DATASTAX_CASSANDRA",
+   "name" : "CASSANDRA",
    "label" : "Cassandra",
    "description" : "Cassandra NoSQL database",
    "maxInstances" : 1,
